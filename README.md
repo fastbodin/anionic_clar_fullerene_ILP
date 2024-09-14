@@ -48,15 +48,13 @@ for all fullerenes on 30 vertices. Note that Buckygen
 (https://github.com/evanberkowitz/buckygen) can be used to generate fullerenes in this
 format. **Note**, vertices should be labelled starting at 0!
 
-`{number of vertices in graph (call it n)}
-
+```
+{number of vertices in graph (call it n)}
 {degree of vertex 0} {neighbor 0} {neighbor 1} {neighbor 2}
-
 {degree of vertex 1} {neighbor 0} {neighbor 1} {neighbor 2}
-
 ...
-
-{degree of vertex n-1} {neighbor 0} {neighbor 1} {neighbor 2}`
+{degree of vertex n-1} {neighbor 0} {neighbor 1} {neighbor 2}
+```
 
 ### Compile:
 
@@ -65,13 +63,16 @@ that I used on my Macbook when running Gurobi 11.
 
 There are a couple compiling flags you can change in `include.h`. 
 
-`// Input the maximum size of a fullerene you plan to read in\n
-constexpr int NMAX = 120;\n
-// For debugging purposes\n
-#define DEBUG 0\n
-#define DEBUG_DUAL 0\n
-#define DEBUG_CLAR 0\n
-#define DEBUG_GUROBI 0`
+```
+// Input the maximum size of a fullerene you plan to read in
+constexpr int NMAX = 120;
+// For debugging purposes
+#define DEBUG 0
+#define DEBUG_DUAL 0
+#define DEBUG_CLAR 0
+#define DEBUG_GUROBI 0
+
+```
 
 This code will work up to fullerenes on 998 vertices, but the default is set 
 to 120. Change `NMAX` to the maximum number of vertices you want to use.
