@@ -85,16 +85,15 @@ you should not need to).
 ### Output:
 Given a file of your input fullerenes, files will be written to *output/*. 
 
+```
 n_p_anionic_clar_num <- p-anionic Clar number of fullerenes on n vertices
-
 n_p_r_pent <- File of resonant pentagons of fullerenes on n vertices. Format per row: 
 {# of res. pent} {face ids of res. pent.}
-
 n_p_r_hex <- File of resonant hexagon of fullerenes on n vertices. Format per row: 
 {# of res. hex} {face ids of res. hex.}
-
 n_p_match_e <- File of matching edges of fullerenes on n vertices. Format per row: 
 {2*(# of matching edges)} {endpoint 0 and endpoint 1 of each matching edge}
+```
 
 See *output/* for an example output for the 2-anionic Clar number of
 all fullerenes on 30 vertices.
