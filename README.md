@@ -80,7 +80,10 @@ The other flags can be changed from 0 to 1 depending on what you want to debug (
 you should not need to).
 
 ### To run:
+
+```
 ./comp_p_anionic_clar_num {value of p to solve for} < {file of fullerenes}
+```
 
 ### Output:
 Given a file of your input fullerenes, files will be written to *output/*. 
