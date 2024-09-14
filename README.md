@@ -65,12 +65,12 @@ that I used on my Macbook when running Gurobi 11.
 
 There are a couple compiling flags you can change in `include.h`. 
 
-`// Input the maximum size of a fullerene you plan to read in
-constexpr int NMAX = 120;
-// For debugging purposes
-#define DEBUG 0
-#define DEBUG_DUAL 0
-#define DEBUG_CLAR 0
+`// Input the maximum size of a fullerene you plan to read in\n
+constexpr int NMAX = 120;\n
+// For debugging purposes\n
+#define DEBUG 0\n
+#define DEBUG_DUAL 0\n
+#define DEBUG_CLAR 0\n
 #define DEBUG_GUROBI 0`
 
 This code will work up to fullerenes on 998 vertices, but the default is set 
