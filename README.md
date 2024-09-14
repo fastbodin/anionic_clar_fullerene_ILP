@@ -3,7 +3,7 @@ This repo contains code to solve the p-anionic Clar number on fullerenes.
 ### Definitions
 
 A **fullerene** $F_n$ is a 3-regular graph such that every face is a pentagon or a hexagon.
-Let $F(F_n)$ and $E(F_n)$ denote the set of faces and edges in a fullerene $F_n$.
+Let $F(F_n)$ and $E(F_n)$ denote the set of faces and edges in a fullerene $F_n$, respectively.
 For a fixed integer p, a **p-anionic resonance structure**
 $(\mathcal{F}, \mathcal{M})$ of a fullerene $F_n$ is a set of independent 
 faces $\mathcal{F} \subseteq F(F_n)$ (containing exactly p pentagons) and a perfect 
@@ -62,9 +62,8 @@ for all fullerenes on 30 vertices.
 ### To run:
 ./comp_p_anionic_clar_num {value of p to solve for} < {file of fullerenes}
 
-### Output**: 
-Given a file of your input fullerenes, files will be written to *output/*. There
-will be four files where row $i$ corresponds with graph $i$ in your input file.
+### Output:
+Given a file of your input fullerenes, files will be written to *output/*. 
 
 n_p_anionic_clar_num <- p-anionic Clar number of fullerenes on n vertices
 
