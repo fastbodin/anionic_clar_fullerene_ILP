@@ -10,7 +10,7 @@ matching $\mathcal{M} \subseteq E(F_n)$ on the graph obtained from $F_n$ by remo
 vertices of the faces in $\mathcal{F}$. The *p-anionic Clar number* $C_p(F_n)$ 
 of a fullerene $F_n$ is defined to be zero if $F_n$ has no p-anionic resonance 
 structures and, otherwise, to be equal to the maximum value of 
-$\lvert \mathcal{F} \rvert $ over all p-anionic resonance structures 
+$|\mathcal{F}|$ over all p-anionic resonance structures 
 $(\mathcal{F}, \mathcal{M})$ of $F_n$. A p-anionic resonance structure that has 
 $C_p(F_n)$ faces in $\mathcal{F}$ is called a *p-anionic Clar structure* on 
 $F_n$. 
@@ -21,7 +21,7 @@ This code uses the following ILP (Integer Linear Program) to solve the p-anionic
 number of a fullerene $F_n$.
 
 Let $H(F_n)$ and $P(F_n)$ denote the set of hexagonal and pentagonal faces of $F_n$ and, 
-for each $i \in V(F_n)$, let $HP(i)$ denote the set of faces containing the vertex $i$.  
+for each $i \in V(F_n)$, let $HP(i)$ denote the set of faces containing the vertex $i$. 
 Given a perfect matching $\mathcal{M}$ that achieves $C_p(F_n)$ independent resonant 
 faces, recall that p faces are pentagons. For each face $f\in H(F_n)\cup P(F_n)$, 
 let $y_f=1$ if $f$ is a resonant face and 0 otherwise. For each unordered edge 
