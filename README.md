@@ -40,14 +40,16 @@ p-anionic Clar number of $F_n$ is the cost of an optimal solution to the followi
 1. A CPP+14 compiler.
 
 2. This implementation requires a local copy of a Gurobi solver (https://www.gurobi.com/).
-*Update* the Makefile to point to your copy of gurobi, I included an example
+**Update** the Makefile to point to your copy of gurobi, I included an example
 that I used on my Macbook when running Gurobi 11.
 
 3. A file containing fullerenes and their adjacency lists in a *particular* format.
 For each isomer in the file, please use the following format such that 
 **there exists a planar embedding of the vertices where each neighbor
 is listed in clockwise order.** See bottom output/030_adj for an example
-for all fullerenes on 30 vertices.
+for all fullerenes on 30 vertices. Note that Buckygen 
+(https://github.com/evanberkowitz/buckygen) can be used to generate fullerenes in this
+format.
 
 {number of vertices in graph 0 (call it n_0)}
 
