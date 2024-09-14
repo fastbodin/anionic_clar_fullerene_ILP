@@ -102,9 +102,9 @@ See *output/* for an example output for the 2-anionic Clar number of
 all fullerenes on 30 vertices.
 
 ## Example:
-2-anionic Clar structure on $C_30$:1. Faces and vertices labelled. Matching
+2-anionic Clar structure on $C_{30}$:1. Faces and vertices labelled. Matching
 edges are indicated in red, resonant pentagons in purple, and resonant hexagons
 in blue.
 
-![2-anionic Clar structure on $C_30$:1](30_2.png)
+![2-anionic Clar structure on $C_{30}$:1](30_2.png)
 
