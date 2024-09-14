@@ -1,6 +1,6 @@
 This repo contains code to solve the p-anionic Clar number on fullerenes.
 
-# Definitions
+## Definitions
 
 A *fullerene* is a 3-regular graph such that every face is a pentagon or a hexagon.
 For a fixed integer p, a *p-anionic resonance structure* 
@@ -15,28 +15,26 @@ $(\mathcal{F}, \mathcal{M})$ of $F_n$. A p-anionic resonance structure that has
 $C_p(F_n)$ faces in $\mathcal{F}$ is called a *p-anionic Clar structure* on 
 $F_n$. 
 
-# Solving via ILP
+## Solving via ILP
 
 This code uses the following ILP (Integer Linear Program) to solve the p-anionic Clar 
 number of a fullerene $F_n$.
 
 Let $H(F_n)$ and $P(F_n)$ denote the set of hexagonal and pentagonal faces of $F_n$ and, 
 for each $i \in V(F_n)$, let $HP(i)$ denote the set of faces containing the vertex $i$. 
-Given a perfect matching $\mathcal{M}$ that achieves $C_p(F_n)$ independent resonant 
-faces, recall that p faces are pentagons. For each face $f\in H(F_n)\cup P(F_n)$, 
-let $y_f=1$ if $f$ is a resonant face and 0 otherwise. For each unordered edge 
-$(i,j) \in E(F_n)$, let $x_{i,j}=1$ if $(i,j) \in \mathcal{M}$ but $(i,j)$ is not in a 
-resonant face and 0 otherwise. The p-anionic Clar number of $F_n$ is the cost of an 
-optimal solution to the following ILP:
+For each face $f\in H(F_n)\cup P(F_n)$, let $y_f=1$ if $f$ is a resonant face and 0 
+otherwise. For each unordered edge $(i,j) \in E(F_n)$, let $x_{i,j}=1$ if 
+$(i,j) \in \mathcal{M}$ but $(i,j)$ is not in a resonant face and 0 otherwise. The 
+p-anionic Clar number of $F_n$ is the cost of an optimal solution to the following ILP:
 
 **Maximize**: $p +\sum_{f \in H(G)} y_{f}$
 
 **Subject to:** 
 1. $\sum_{j \in N(i)} x_{i,j} + \sum_{f \in HP(i)} y_{f} = 1$, for each vertex $i \in V(G)$,
 2. $\sum_{f \in P(G)} y_f = p$, and
-3. $x_{i,j}, y_f \in \{0,1\}$, for each $(i,j)\in E(G)$ and $f \in H(G)\cup P(G)$.  
+3. $x_{i,j}, y_f \in {0,1}$, for each $(i,j)\in E(G)$ and $f \in H(G)\cup P(G)$.  
 
-# Code
+## Code
 
 **Required**: 
 
@@ -96,17 +94,20 @@ Given a file of your input fullerenes, files will be written to *output/*. There
 will be four files where row $i$ corresponds with graph $i$ in your input file.
 
 n_p_anionic_clar_num <- p-anionic Clar number of fullerenes on n vertices
+
 n_p_r_pent <- File of resonant pentagons of fullerenes on n vertices. Format per row: 
 {# of res. pent} {face ids of res. pent.}
+
 n_p_r_hex <- File of resonant hexagon of fullerenes on n vertices. Format per row: 
 {# of res. hex} {face ids of res. hex.}
+
 n_p_match_e <- File of matching edges of fullerenes on n vertices. Format per row: 
 {2*(# of matching edges)} {endpoint 0 and endpoint 1 of each matching edge}
 
 See *output/* for an example output for the 2-anionic Clar number of
 all fullerenes on 30 vertices.
 
-# Example adj. list format for all fullerenes on 30 vertices, sorted by minimum face spiral
+## Example adj. list format for all fullerenes on 30 vertices, sorted by minimum face spiral
 
 30
 
