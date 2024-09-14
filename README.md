@@ -101,3 +101,10 @@ n_p_match_e <- File of matching edges of fullerenes on n vertices. Format per ro
 See *output/* for an example output for the 2-anionic Clar number of
 all fullerenes on 30 vertices.
 
+## Example:
+2-anionic Clar structure on $C_30$:1. Faces and vertices labelled. Matching
+edges are indicated in red, resonant pentagons in purple, and resonant hexagons
+in blue.
+
+![30_2.png]
+
