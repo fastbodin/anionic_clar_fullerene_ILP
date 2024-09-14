@@ -2,7 +2,8 @@ This repo contains code to solve the p-anionic Clar number on fullerenes.
 
 ### Definitions
 
-A **fullerene** is a 3-regular graph such that every face is a pentagon or a hexagon.
+A **fullerene** $F_n$ is a 3-regular graph such that every face is a pentagon or a hexagon.
+Let $F(F_n)$ and $E(F_n)$ denote the set of faces and edges in a fullerene $F_n$.
 For a fixed integer p, a **p-anionic resonance structure**
 $(\mathcal{F}, \mathcal{M})$ of a fullerene $F_n$ is a set of independent 
 faces $\mathcal{F} \subseteq F(F_n)$ (containing exactly p pentagons) and a perfect 
@@ -27,7 +28,7 @@ otherwise. For each unordered edge $(i,j) \in E(F_n)$, let $x_{i,j}=1$ if
 $(i,j) \in \mathcal{M}$ but $(i,j)$ is not in a resonant face and 0 otherwise. The 
 p-anionic Clar number of $F_n$ is the cost of an optimal solution to the following ILP:
 
-**Maximize**: $\sum_{f \in H(F_n)\cup P(F_n)} y_{f}$
+**Maximize**: $\sum_{f \in F(F_n)} y_{f}$
 
 **Subject to:** 
 1. $\sum_{j \in N(i)} x_{i,j} + \sum_{f \in HP(i)} y_{f} = 1$, for each vertex $i \in V(F_n)$,
