@@ -23,7 +23,7 @@ Let $H(F_n)$ and $P(F_n)$ denote the set of hexagonal and pentagonal faces of $F
 for each $i \in V(F_n)$, let $HP(i)$ denote the set of faces containing the vertex $i$. 
 For each face $f\in H(F_n)\cup P(F_n)$, let $y_f=1$ if $f$ is a resonant face and 0 
 otherwise. For each unordered edge $(i,j) \in E(F_n)$, let $x_{i,j}=1$ if 
-$(i,j) \in \mathcal{M}$ but $(i,j)$ is not in a resonant face and 0 otherwise. The 
+$(i,j)$ is a matching edge and 0 otherwise. The 
 p-anionic Clar number of $F_n$ is the cost of an optimal solution to the following ILP:
 
 **Maximize**: $\sum_{f \in F(F_n)} y_{f}$
