@@ -39,8 +39,6 @@ p-anionic Clar number of $F_n$ is the cost of an optimal solution to the followi
 1. A CPP+14 compiler.
 
 2. This implementation requires a local copy of a Gurobi solver (https://www.gurobi.com/).
-**Update** the Makefile to point to your copy of gurobi, I included an example
-that I used on my Macbook when running Gurobi 11.
 
 3. A file containing fullerenes and their adjacency lists in a *particular* format.
 For each isomer in the file, please use the following format such that 
@@ -50,15 +48,27 @@ for all fullerenes on 30 vertices. Note that Buckygen
 (https://github.com/evanberkowitz/buckygen) can be used to generate fullerenes in this
 format. **Note**, vertices should be labelled starting at 0!
 
-{number of vertices in graph (call it n)}
-
+'{number of vertices in graph (call it n)}
 {degree of vertex 0} {neighbor 0} {neighbor 1} {neighbor 2}
-
 {degree of vertex 1} {neighbor 0} {neighbor 1} {neighbor 2}
-
 ...
+{degree of vertex n-1} {neighbor 0} {neighbor 1} {neighbor 2}'
 
-{degree of vertex n-1} {neighbor 0} {neighbor 1} {neighbor 2}
+### Compile:
+
+**Update** the Makefile to point to your copy of Gurobi. I included an example
+that I used on my Macbook when running Gurobi 11.
+
+There are a couple compiling flags you can change in 'include.h'. 
+This code will work up to fullerenes on 998 vertices, but the default is set 
+to 120. Change 'NMAX' to the maximum number of vertices you want to use.
+
+'constexpr int NMAX = 120;
+// For debugging purposes
+#define DEBUG 0
+#define DEBUG_DUAL 0
+#define DEBUG_CLAR 0
+#define DEBUG_GUROBI 0'
 
 ### To run:
 ./comp_p_anionic_clar_num {value of p to solve for} < {file of fullerenes}
