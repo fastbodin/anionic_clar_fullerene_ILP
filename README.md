@@ -1,21 +1,21 @@
 This repo contains code to solve the p-anionic Clar number on fullerenes.
 
-## Definitions
+### Definitions
 
-A *fullerene* is a 3-regular graph such that every face is a pentagon or a hexagon.
-For a fixed integer p, a *p-anionic resonance structure* 
+A **fullerene** is a 3-regular graph such that every face is a pentagon or a hexagon.
+For a fixed integer p, a **p-anionic resonance structure**
 $(\mathcal{F}, \mathcal{M})$ of a fullerene $F_n$ is a set of independent 
 faces $\mathcal{F} \subseteq F(F_n)$ (containing exactly p pentagons) and a perfect 
 matching $\mathcal{M} \subseteq E(F_n)$ on the graph obtained from $F_n$ by removing the 
-vertices of the faces in $\mathcal{F}$. The *p-anionic Clar number* $C_p(F_n)$ 
+vertices of the faces in $\mathcal{F}$. The **p-anionic Clar number** $C_p(F_n)$ 
 of a fullerene $F_n$ is defined to be zero if $F_n$ has no p-anionic resonance 
 structures and, otherwise, to be equal to the maximum value of 
 $|\mathcal{F}|$ over all p-anionic resonance structures 
 $(\mathcal{F}, \mathcal{M})$ of $F_n$. A p-anionic resonance structure that has 
-$C_p(F_n)$ faces in $\mathcal{F}$ is called a *p-anionic Clar structure* on 
+$C_p(F_n)$ faces in $\mathcal{F}$ is called a **p-anionic Clar structure** on 
 $F_n$. 
 
-## Solving via ILP
+### Solving via ILP
 
 This code uses the following ILP (Integer Linear Program) to solve the p-anionic Clar 
 number of a fullerene $F_n$.
@@ -27,12 +27,12 @@ otherwise. For each unordered edge $(i,j) \in E(F_n)$, let $x_{i,j}=1$ if
 $(i,j) \in \mathcal{M}$ but $(i,j)$ is not in a resonant face and 0 otherwise. The 
 p-anionic Clar number of $F_n$ is the cost of an optimal solution to the following ILP:
 
-**Maximize**: $p +\sum_{f \in H(G)} y_{f}$
+**Maximize**: $$p +\sum_{f \in H(G)} y_{f}$$
 
 **Subject to:** 
-1. $\sum_{j \in N(i)} x_{i,j} + \sum_{f \in HP(i)} y_{f} = 1$, for each vertex $i \in V(G)$,
-2. $\sum_{f \in P(G)} y_f = p$, and
-3. $x_{i,j}, y_f \in {0,1}$, for each $(i,j)\in E(G)$ and $f \in H(G)\cup P(G)$.  
+1. $$\sum_{j \in N(i)} x_{i,j} + \sum_{f \in HP(i)} y_{f} = 1$$, for each vertex $i \in V(G)$,
+2. $$\sum_{f \in P(G)} y_f = p$$, and
+3. $$x_{i,j}, y_f \in {0,1}$$, for each $(i,j)\in E(G)$ and $f \in H(G)\cup P(G)$.  
 
 ## Code
 
