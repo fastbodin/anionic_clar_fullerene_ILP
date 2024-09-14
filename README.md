@@ -46,7 +46,7 @@ For each isomer in the file, please use the following format such that
 is listed in clockwise order.** See bottom output/030_adj for an example
 for all fullerenes on 30 vertices. Note that Buckygen 
 (https://github.com/evanberkowitz/buckygen) can be used to generate fullerenes in this
-format. **Note**, vertices should be labelled starting at 0!
+format. **Vertices should be labelled starting at 0.**
 
 ```
 {number of vertices in graph (call it n)}
