@@ -51,13 +51,15 @@ for all fullerenes on 30 vertices. Note that Buckygen
 (https://github.com/evanberkowitz/buckygen) can be used to generate fullerenes in this
 format.
 
-{number of vertices in graph 0 (call it n_0)}
+{number of vertices in graph (call it n)}
+
+{degree of vertex 0} {neighbor 0} {neighbor 1} {neighbor 2}
 
 {degree of vertex 1} {neighbor 0} {neighbor 1} {neighbor 2}
 
 ...
 
-{degree of vertex n_0-1} {neighbor 0} {neighbor 1} {neighbor 2}
+{degree of vertex n-1} {neighbor 0} {neighbor 1} {neighbor 2}
 
 ### To run:
 ./comp_p_anionic_clar_num {value of p to solve for} < {file of fullerenes}
