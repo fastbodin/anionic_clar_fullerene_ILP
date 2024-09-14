@@ -11,8 +11,7 @@ of a fullerene $F_n$ is defined to be zero if $F_n$ has no p-anionic resonance
 structures and, otherwise, to be equal to the maximum value of 
 $|\mathcal{F}|$ over all p-anionic resonance structures 
 $(\mathcal{F}, \mathcal{M})$ of $F_n$. A p-anionic resonance structure that has 
-$C_p(F_n)$ faces in $\mathcal{F}$ is called a **p-anionic Clar structure** on 
-$F_n$. 
+$C_p(F_n)$ faces in $\mathcal{F}$ is called a **p-anionic Clar structure** on $F_n$. 
 
 ### Solving via ILP
 
@@ -31,7 +30,7 @@ p-anionic Clar number of $F_n$ is the cost of an optimal solution to the followi
 **Subject to:** 
 1. $\sum_{j \in N(i)} x_{i,j} + \sum_{f \in HP(i)} y_{f} = 1$, for each vertex $i \in V(F_n)$,
 2. $\sum_{f \in P(F_n)} y_f = p$, and
-3. $x_{i,j}, y_f \in {0,1}$, for each $(i,j)\in E(F_n)$ and $f \in H(F_n)\cup P(F_n)$.  
+3. $x_{i,j}, y_f \in [0,1]$, for each $(i,j)\in E(F_n)$ and $f \in H(F_n)\cup P(F_n)$.  
 
 ## Code
 
