@@ -61,7 +61,7 @@ format. **Vertices should be labelled starting at 0.**
 **Update** the Makefile to point to your copy of Gurobi. I included an example
 that I used on my Macbook when running Gurobi 11.
 
-There are a couple compiling flags you can change in `include.h`. 
+There are a some compiling flags you can change in `include.h`. 
 
 ```
 // Input the maximum size of a fullerene you plan to read in
@@ -104,7 +104,7 @@ all fullerenes on 30 vertices.
 ## Example:
 2-anionic Clar structure on $C_{30}$:1. Faces and vertices labelled. Matching
 edges are indicated in red, resonant pentagons in purple, and resonant hexagons
-in blue.
+in blue. 
 
 <img src="30_2.png" alt="2-anionic Clar structure on $C_{30}$:1" width="400">
 
