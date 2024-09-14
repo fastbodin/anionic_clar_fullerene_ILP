@@ -27,12 +27,12 @@ otherwise. For each unordered edge $(i,j) \in E(F_n)$, let $x_{i,j}=1$ if
 $(i,j) \in \mathcal{M}$ but $(i,j)$ is not in a resonant face and 0 otherwise. The 
 p-anionic Clar number of $F_n$ is the cost of an optimal solution to the following ILP:
 
-**Maximize**: $$p +\sum_{f \in H(G)} y_{f}$$
+**Maximize**: $\sum_{f \in H(F_n)\cup P(F_n)} y_{f}$
 
 **Subject to:** 
-1. $$\sum_{j \in N(i)} x_{i,j} + \sum_{f \in HP(i)} y_{f} = 1$$, for each vertex $i \in V(G)$,
-2. $$\sum_{f \in P(G)} y_f = p$$, and
-3. $$x_{i,j}, y_f \in \{0,1\}$$, for each $(i,j)\in E(G)$ and $f \in H(G)\cup P(G)$.  
+1. $\sum_{j \in N(i)} x_{i,j} + \sum_{f \in HP(i)} y_{f} = 1$, for each vertex $i \in V(F_n)$,
+2. $\sum_{f \in P(F_n)} y_f = p$, and
+3. $x_{i,j}, y_f \in $ {0,1}, for each $(i,j)\in E(F_n)$ and $f \in H(F_n)\cup P(F_n)$.  
 
 ## Code
 
