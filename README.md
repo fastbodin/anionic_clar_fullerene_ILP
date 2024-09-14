@@ -48,27 +48,35 @@ for all fullerenes on 30 vertices. Note that Buckygen
 (https://github.com/evanberkowitz/buckygen) can be used to generate fullerenes in this
 format. **Note**, vertices should be labelled starting at 0!
 
-'{number of vertices in graph (call it n)}
+`{number of vertices in graph (call it n)}
+
 {degree of vertex 0} {neighbor 0} {neighbor 1} {neighbor 2}
+
 {degree of vertex 1} {neighbor 0} {neighbor 1} {neighbor 2}
+
 ...
-{degree of vertex n-1} {neighbor 0} {neighbor 1} {neighbor 2}'
+
+{degree of vertex n-1} {neighbor 0} {neighbor 1} {neighbor 2}`
 
 ### Compile:
 
 **Update** the Makefile to point to your copy of Gurobi. I included an example
 that I used on my Macbook when running Gurobi 11.
 
-There are a couple compiling flags you can change in 'include.h'. 
-This code will work up to fullerenes on 998 vertices, but the default is set 
-to 120. Change 'NMAX' to the maximum number of vertices you want to use.
+There are a couple compiling flags you can change in `include.h`. 
 
-'constexpr int NMAX = 120;
+`// Input the maximum size of a fullerene you plan to read in
+constexpr int NMAX = 120;
 // For debugging purposes
 #define DEBUG 0
 #define DEBUG_DUAL 0
 #define DEBUG_CLAR 0
-#define DEBUG_GUROBI 0'
+#define DEBUG_GUROBI 0`
+
+This code will work up to fullerenes on 998 vertices, but the default is set 
+to 120. Change `NMAX` to the maximum number of vertices you want to use.
+The other flags can be changed from 0 to 1 depending on what you want to debug (
+you should not need to).
 
 ### To run:
 ./comp_p_anionic_clar_num {value of p to solve for} < {file of fullerenes}
