@@ -36,7 +36,7 @@ p-anionic Clar number of $F_n$ is the cost of an optimal solution to the followi
 
 ## Code
 
-**Required**: 
+### Requirements:
 
 1. A CPP+14 compiler.
 
@@ -52,35 +52,16 @@ for all fullerenes on 30 vertices.
 
 {number of vertices in graph 0 (call it n_0)}
 
-{degree of vertex 0} {neighbor 0} {neighbor 1} {neighbor 2}
-
 {degree of vertex 1} {neighbor 0} {neighbor 1} {neighbor 2}
 
 ...
 
 {degree of vertex n_0-1} {neighbor 0} {neighbor 1} {neighbor 2}
 
-.
-
-.
-
-.
-
-{number of vertices in last graph in file (call it n_f)}
-
-{degree of vertex 0} {neighbor 0} {neighbor 1} {neighbor 2}
-
-{degree of vertex 1} {neighbor 0} {neighbor 1} {neighbor 2}
-
-...
-
-{degree of vertex n_f-1} {neighbor 0} {neighbor 1} {neighbor 2}$
-
-
-**To run**:
+### To run:
 ./comp_p_anionic_clar_num {value of p to solve for} < {file of fullerenes}
 
-**Output**: 
+### Output**: 
 Given a file of your input fullerenes, files will be written to *output/*. There
 will be four files where row $i$ corresponds with graph $i$ in your input file.
 
