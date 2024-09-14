@@ -1,5 +1,3 @@
-This repo contains code to solve the p-anionic Clar number on fullerenes.
-
 ### Definitions
 
 A **fullerene** $F_n$ is a 3-regular graph such that every face is a pentagon or a hexagon.
