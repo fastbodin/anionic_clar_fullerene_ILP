@@ -106,5 +106,5 @@ all fullerenes on 30 vertices.
 edges are indicated in red, resonant pentagons in purple, and resonant hexagons
 in blue.
 
-![30_2.png]
+![2-anionic Clar structure on $C_30$:1](30_2.png)
 
