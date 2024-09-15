@@ -1,7 +1,8 @@
 ### Definitions
 
-A **fullerene** $F_n$ is a 3-regular graph such that every face is a pentagon or a hexagon.
-Let $F(F_n)$ and $E(F_n)$ denote the set of faces and edges in a fullerene $F_n$, respectively.
+A **fullerene** $F_n$ is a 3-regular graph such that every face is a pentagon or a 
+hexagon. By Euler's formula, there are exactly 12 pentagons. Let $F(F_n)$ and 
+$E(F_n)$ denote the set of faces and edges in a fullerene $F_n$, respectively.
 For a fixed integer p, a **p-anionic resonance structure**
 $(\mathcal{F}, \mathcal{M})$ of a fullerene $F_n$ is a set of independent 
 faces $\mathcal{F} \subseteq F(F_n)$ (containing exactly p pentagons) and a perfect 
