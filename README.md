@@ -112,6 +112,6 @@ in blue.
 <img src="30_2.png" alt="2-anionic Clar structure on $C_{30}$:1" width="400">
 
 
-There are two resonant pentagons: 1 12, one resonant hexagon: 9, and seven
-matching edges: (1, 9), (2, 3), (8, 19), (13, 14), (15, 24), (20, 28), and (25, 29)
+There are two resonant pentagons: 1 and 12, one resonant hexagon: 9, and seven
+matching edges: (1, 9), (2, 3), (8, 19), (13, 14), (15, 24), (20, 28), and (25, 29).
 
