@@ -14,7 +14,7 @@ $|\mathcal{F}|$ over all p-anionic resonance structures
 $(\mathcal{F}, \mathcal{M})$ of $F_n$. A p-anionic resonance structure that has 
 $C_p(F_n)$ faces in $\mathcal{F}$ is called a **p-anionic Clar structure** on $F_n$. 
 
-### Solving via ILP
+### Solving for the p-anionic Clar number 
 
 This code uses the following ILP (Integer Linear Program) to solve the p-anionic Clar 
 number of a fullerene $F_n$.
@@ -107,10 +107,7 @@ all fullerenes on 30 vertices.
 edges are indicated in red, resonant pentagons in purple, and resonant hexagons
 in blue. 
 
-
-
 <img src="30_2.png" alt="2-anionic Clar structure on $C_{30}$:1" width="400">
-
 
 There are two resonant pentagons: 1 and 12, one resonant hexagon: 9, and seven
 matching edges: (1, 9), (2, 3), (8, 19), (13, 14), (15, 24), (20, 28), and (25, 29).
