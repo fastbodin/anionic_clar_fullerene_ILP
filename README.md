@@ -88,7 +88,8 @@ you should not need to).
 Given a file of your input fullerenes, files will be written to *output/*. 
 
 ```
-n_p_anionic_clar_num <- p-anionic Clar number of fullerenes on n vertices
+n_p_anionic_clar_num <- File of solved p-anionic Clar number of fullerenes on n vertices. 
+Format per row: {p-anionic Clar #}.
 n_p_r_pent <- File of resonant pentagons of fullerenes on n vertices. Format per row: 
 {# of res. pent} {face ids of res. pent.}
 n_p_r_hex <- File of resonant hexagon of fullerenes on n vertices. Format per row: 
