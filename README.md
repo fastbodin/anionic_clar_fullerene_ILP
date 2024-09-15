@@ -44,7 +44,7 @@ p-anionic Clar number of $F_n$ is the cost of an optimal solution to the followi
 3. A file containing fullerenes and their adjacency lists in a *particular* format.
 For each isomer in the file, please use the following format such that 
 **there exists a planar embedding of the vertices where each neighbor
-is listed in clockwise order.** See bottom output/030_adj for an example
+is listed in clockwise order.** See output/030_adj for an example
 for all fullerenes on 30 vertices. Note that Buckygen 
 (https://github.com/evanberkowitz/buckygen) can be used to generate fullerenes in this
 format. **Vertices should be labelled starting at 0.**
