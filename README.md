@@ -71,7 +71,6 @@ constexpr int NMAX = 120;
 #define DEBUG_DUAL 0
 #define DEBUG_CLAR 0
 #define DEBUG_GUROBI 0
-
 ```
 
 This code will work up to fullerenes on 998 vertices, but the default is set 
