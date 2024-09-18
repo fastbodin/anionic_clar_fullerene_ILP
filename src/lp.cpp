@@ -18,7 +18,7 @@ int check_if_sol_valid(const fullerene (&F), const int p,
             cerr << "n = " << F.n << ", p = " << p << ", graph num = " << F.id << endl;
             cerr << "Error: " << "Vertex " << i << " is covered " << covered << 
                 " times" << endl;
-            exit(0);
+            exit(1);
         }
     }
     // for each face in graph
@@ -30,7 +30,7 @@ int check_if_sol_valid(const fullerene (&F), const int p,
     }
     if (res_pents != p) {
         cerr << "Incorrect number of resonant pentagons: " << res_pents << endl;
-        exit(0);
+        exit(1);
     }
     return num_res_faces;
 }
@@ -119,17 +119,17 @@ void p_anionic_clar_lp(const fullerene (&F), const int p, GRBEnv grb_env,
         } else {
             cerr << "n = " << F.n << ", p = " << p << ", graph num = " << F.id << endl;
             cerr << "Something went wrong with the solve:" << endl;
-            exit(0);
+            exit(1);
         }
     } catch(GRBException e) {
         cerr << "n = " << F.n << ", p = " << p << ", graph num = " << F.id << endl;
         cerr << "Error code = " << e.getErrorCode() << endl;
         cerr << e.getMessage() << endl;
-        exit(0);
+        exit(1);
     } catch (...) {
         cerr << "n = " << F.n << ", p = " << p << ", graph num = " << F.id << endl;
         cerr << "Error during optimization" << endl;
-        exit(0);
+        exit(1);
     }
 }
 

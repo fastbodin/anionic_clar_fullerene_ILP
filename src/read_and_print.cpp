@@ -10,19 +10,19 @@ bool read_fullerene(int *n, vertex (&primal)[NMAX]) {
     // smallest fullerene is on 20 vertices and there exists no fullerene on 22 vertices
     if (*n < 20 || *n == 22 || *n > NMAX) {
         cerr << "Error: Invalid fullerene size of " << *n << endl;
-        exit(0);
+        exit(1);
     }
     // for each vertex in the graph
     for (int i = 0; i < *n; i++) {
         // read in degree of vertex i
         if (!(cin >> degree)) {
             cerr << "Error: Failed to read in vertex degree" << endl;
-            exit(0);
+            exit(1);
         }
         // check vertex degree
         if (degree != 3) {
             cerr << "Error: Invalid degree size: " << degree << endl;
-            exit(0);
+            exit(1);
         }
         // for each neighbour of i
         for (int j = 0; j < 3; j++) {
@@ -30,7 +30,7 @@ bool read_fullerene(int *n, vertex (&primal)[NMAX]) {
             if (!(cin >> primal[i].adj_v[j])) {
                 cerr << "Error: Failed to read in neighbour: " << j
                           << " of vertex " << i << endl;
-                exit(0);
+                exit(1);
             }
             // each vertex lies on 3 faces, at this time, we do not know what their
             // ids are, we will therefore assign then as -1 to represent 'unassigned'
@@ -156,14 +156,14 @@ void open_out_file(const int n, const int p, string (&out_file_names)[NFILE],
                    ofstream out_files_ptr[NFILE]){ 
     if (n > 999) {
         cerr << "Function get_out_name is limited to n <= 999" << endl;
-        exit(0);
+        exit(1);
     }
     for (int i = 0; i < NFILE; i++){
          get_out_name(n, p, out_file_names[i]);
          out_files_ptr[i].open(out_file_names[i], ios::app);
          if (!out_files_ptr[i].is_open()) {
              cerr << "Error opening file " << out_file_names[i] << endl;
-             exit(0);
+             exit(1);
          }
     }
 }

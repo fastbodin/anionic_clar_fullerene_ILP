@@ -10,7 +10,7 @@ int find_position(const int v, const int u, int v_adj[3]) {
     }
     cerr << "Error: Could not find position of " << u << " in neighbourhood of "
          << v << endl;
-    exit(0);
+    exit(1);
 }
 
 
@@ -47,7 +47,7 @@ int counter_clockwise_walk(const int face_id, int u, int v, const int n,
     if (face_size != 5 && face_size != 6) {
         cerr << "Error: face " << setw(4) << face_id << " has size " << setw(4) 
              << face_size << endl;
-        exit(0);
+        exit(1);
     }
 #if DEBUG_DUAL
     cout << setw(4) << face_id << " has size " << setw(4) << face_size << endl;
@@ -95,7 +95,7 @@ void construct_planar_dual(fullerene (&F), const int p) {
     // record the number of edges in the graph
     if (edge_id != 3*F.n/2) { 
         cerr << "Incorrect number of edges: " << edge_id << endl;
-        exit(0);
+        exit(1);
     }
     F.num_edges = edge_id;
     // record the number of faces in the planar dual
