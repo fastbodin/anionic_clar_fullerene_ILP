@@ -23,8 +23,6 @@ struct vertex {
     int faces[3];
     // edges it is an endpoint of
     int edges[3];
-    // number of edges assigned to the vertex currently
-    int num_edges;
 };
 
 // information on each face

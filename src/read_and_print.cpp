@@ -38,9 +38,6 @@ bool read_fullerene(Fullerene (&F)) {
             // ids are, we will therefore assign then as -1 to represent 'unassigned'
             F.primal[i].faces[j] = -1;
         }
-        // at this point, we have not assigned edge ids, so the number of edge ids
-        // assigned to this vertex is 0
-        F.primal[i].num_edges = 0;
     }
     return true;
 }
