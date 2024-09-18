@@ -2,18 +2,20 @@
 
 // read in fullerene graph and populate some default values into the 
 // data structure
-bool read_fullerene(int *n, vertex (&primal)[NMAX]) {
-    int degree;
+bool read_fullerene(Fullerene (&F)) {
+    int degree, n;
     // read in number of vertices of isomer
-    if (!(cin >> *n)) return false;
-    // check that number of vertices is within range
-    // smallest fullerene is on 20 vertices and there exists no fullerene on 22 vertices
-    if (*n < 20 || *n == 22 || *n > NMAX) {
-        cerr << "Error: Invalid fullerene size of " << *n << endl;
+    if (!(cin >> n)) return false;
+    // check that number of vertices is valid
+    // n should be an even number at least 20 and not equal to 22
+    if (n < 20 || n == 22) {
+        cerr << "Error: Invalid fullerene size of " << n << endl;
         exit(1);
     }
+    // resize the fullerene
+    F.Resize(n);
     // for each vertex in the graph
-    for (int i = 0; i < *n; i++) {
+    for (int i = 0; i < n; i++) {
         // read in degree of vertex i
         if (!(cin >> degree)) {
             cerr << "Error: Failed to read in vertex degree" << endl;
@@ -27,23 +29,23 @@ bool read_fullerene(int *n, vertex (&primal)[NMAX]) {
         // for each neighbour of i
         for (int j = 0; j < 3; j++) {
             // update adjacency list of vertex i
-            if (!(cin >> primal[i].adj_v[j])) {
+            if (!(cin >> F.primal[i].adj_v[j])) {
                 cerr << "Error: Failed to read in neighbour: " << j
                           << " of vertex " << i << endl;
                 exit(1);
             }
             // each vertex lies on 3 faces, at this time, we do not know what their
             // ids are, we will therefore assign then as -1 to represent 'unassigned'
-            primal[i].faces[j] = -1;
+            F.primal[i].faces[j] = -1;
         }
         // at this point, we have not assigned edge ids, so the number of edge ids
         // assigned to this vertex is 0
-        primal[i].num_edges = 0;
+        F.primal[i].num_edges = 0;
     }
     return true;
 }
 
-void print_primal(const int n, const vertex (&primal)[NMAX]) {
+void print_primal(const int n, const vector<vertex> primal) {
     cout << "Primal graph" << endl;
     cout << "Vert:  Neighbours         Faces           Edges" << endl;
     for (int i = 0; i < n; i++) {
@@ -63,7 +65,7 @@ void print_primal(const int n, const vertex (&primal)[NMAX]) {
     }
 }
 
-void print_dual(const int dual_n, const face (&dual)[DMAX]) {
+void print_dual(const int dual_n, const vector<face> dual) {
     cout << "Dual graph" << endl << "Face:       Neighbours" << endl;
     for (int i = 0; i < dual_n; i++) {
         cout << setw(4) << i << ": ";
@@ -74,8 +76,8 @@ void print_dual(const int dual_n, const face (&dual)[DMAX]) {
     }
 }
 
-void print_sol(const fullerene (&F), const int num_res_faces,
-               const GRBVar fvars[DMAX], const GRBVar evars[EMAX]) {
+void print_sol(const Fullerene (&F), const int num_res_faces,
+               const vector<GRBVar> fvars, const vector<GRBVar> evars) {
     cout << endl << "n = " << F.n << ", graph num = " << F.id << endl << 
         "Solution summary:" << endl;
     // if there is no solution
@@ -97,8 +99,8 @@ void print_sol(const fullerene (&F), const int num_res_faces,
     cout << endl << endl;
 }
 
-void save_sol(const fullerene (&F), const int p, const int num_res_faces,
-              const GRBVar fvars[DMAX], const GRBVar evars[EMAX],
+void save_sol(const Fullerene (&F), const int p, const int num_res_faces,
+              const vector<GRBVar> fvars, const vector<GRBVar> evars,
               ofstream out_files_ptr [NFILE]) {
     // if there is no solution
     if (num_res_faces == 0) {
@@ -133,33 +135,20 @@ void save_sol(const fullerene (&F), const int p, const int num_res_faces,
     out_files_ptr[3] << endl;
 }
 
-void get_out_name(const int n, const int p, string &fname){
-    // determine first digit of n
-    int n1 = n / 100;
-    // determine second digit of n
-    int n2 = (n % 100) / 10;
-    // determine third digit of n
-    int n3 = (n % 100) % 10;
+void get_out_name(const int p, string &fname){
     // determine first digit of p
     int p1 = p / 10;
     // determine last digit of p
     int p2 = p % 10;
     // update the file name characters
-    fname[7] = (char) n1 + '0';
-    fname[8] = (char) n2 + '0';
-    fname[9] = (char) n3 + '0';
-    fname[11] = (char) p1 + '0';
-    fname[12] = (char) p2 + '0';
+    fname[7] = (char) p1 + '0';
+    fname[8] = (char) p2 + '0';
 }
 
-void open_out_file(const int n, const int p, string (&out_file_names)[NFILE], 
+void open_out_file(const int p, string (&out_file_names)[NFILE], 
                    ofstream out_files_ptr[NFILE]){ 
-    if (n > 999) {
-        cerr << "Function get_out_name is limited to n <= 999" << endl;
-        exit(1);
-    }
     for (int i = 0; i < NFILE; i++){
-         get_out_name(n, p, out_file_names[i]);
+         get_out_name(p, out_file_names[i]);
          out_files_ptr[i].open(out_file_names[i], ios::app);
          if (!out_files_ptr[i].is_open()) {
              cerr << "Error opening file " << out_file_names[i] << endl;

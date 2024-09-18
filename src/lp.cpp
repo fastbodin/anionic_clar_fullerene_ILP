@@ -1,7 +1,7 @@
 #include "include.h"
 
-int check_if_sol_valid(const fullerene (&F), const int p, 
-                       const GRBVar fvars[DMAX], const GRBVar evars[EMAX]) {
+int check_if_sol_valid(const Fullerene (&F), const int p, 
+                       const vector<GRBVar> fvars, const vector<GRBVar> evars) {
     int num_res_faces = 0, res_pents = 0;
     // for each vertex in the graph
     for (int i = 0; i < F.n; i++) {
@@ -35,7 +35,7 @@ int check_if_sol_valid(const fullerene (&F), const int p,
     return num_res_faces;
 }
 
-void p_anionic_clar_lp(const fullerene (&F), const int p, GRBEnv grb_env,
+void p_anionic_clar_lp(const Fullerene (&F), const int p, GRBEnv grb_env,
                       ofstream out_files_ptr [NFILE]) {
 #if DEBUG_CLAR
     cout << "n = " << F.n << ", p = " << p << ", graph num = " << F.id << endl;
@@ -50,7 +50,7 @@ void p_anionic_clar_lp(const fullerene (&F), const int p, GRBEnv grb_env,
 
         // define a 1-dim array for face variables
         // fvars[f] = 1 if f is resonant and 0 otherwise 
-        GRBVar fvars[DMAX];
+        vector<GRBVar> fvars(F.dual_n);
         // make face variables
         for (int f = 0; f < F.dual_n; f++) {
             // lower bound, upper bound, objective coeff, type
@@ -59,7 +59,7 @@ void p_anionic_clar_lp(const fullerene (&F), const int p, GRBEnv grb_env,
 
         // define a 1-dim array for edge variables
         // evars[i] = 1 if the edge i is matching edge and 0 otherwise
-        GRBVar evars[EMAX];
+        vector<GRBVar> evars(F.num_edges);
         // make edge variables
         for (int i = 0; i < F.num_edges; i++) {
             evars[i] = model.addVar(0.0, 1.0, 0.0, GRB_BINARY);

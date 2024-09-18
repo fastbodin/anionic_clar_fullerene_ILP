@@ -3,22 +3,15 @@
 
 using namespace std;
 
-// Input the maximum size of a fullerene you plan to read in
-constexpr int NMAX = 120;
 // For debugging purposes
 #define DEBUG 0
 #define DEBUG_DUAL 0
 #define DEBUG_CLAR 0
 #define DEBUG_GUROBI 0
 
-
 //------ DO NOT CHANGE BELOW ------
 //-------- HERE BE DRAGONS --------
 
-// Fullerenes are 3-regular graphs, therefore a fullerene on n vertices has 3n/2 edges
-constexpr int EMAX = 3 * NMAX / 2;
-// By Euler's formula, the number of faces in a fullerene is 3n/2 - n + 2
-constexpr int DMAX = NMAX / 2 + 2;
 // number of out files
 constexpr int NFILE = 4;
 
@@ -51,40 +44,53 @@ struct edge {
     int vertices[2];
 };
 
+
 // information on each fullerene isomer
-struct fullerene {
-    // primal graph information
-    vertex primal[NMAX];
-    // planar dual graph information
-    face dual[DMAX];
-    // edge information
-    edge edges[EMAX];
-    // size of primal, size of dual, number of edges, and id
-    int n, dual_n, num_edges, id;
+class Fullerene {
+public:
+    Fullerene() : n(0), dual_n(0), num_edges(0), id(0) {}
+    // resize fullerene
+    void Resize(int num_vertices) {
+        n = num_vertices;
+        // Fullerenes are 3-regular graphs, therefore a fullerene on n vertices has 
+        // 3n/2 edges
+        num_edges = (3 * num_vertices / 2);
+        // By Euler's formula, the number of faces in a fullerene is 3n/2 - n + 2
+        dual_n = (num_vertices / 2 + 2);
+        // resize vectors appropriately
+        primal.resize(num_vertices);
+        dual.resize(dual_n);
+        edges.resize(num_edges);
+    }
+    // Attributes
+    int n, dual_n, num_edges, id; // size of primal, size of dual, # of edges, and id
+    vector<vertex> primal; // planar graph information
+    vector<face> dual; // planar dual graph information
+    vector<edge> edges; // edge information
 };
 
 // From read_and_print.cpp
-bool read_fullerene(int *n, vertex (&primal)[NMAX]);
-void print_primal(const int n, const vertex (&primal)[NMAX]);
-void print_dual(const int dual_n, const face (&dual)[DMAX]);
-void print_sol(const fullerene (&F), const int num_res_faces,
-               const GRBVar fvars[DMAX], const GRBVar evars[EMAX]);
-void save_sol(const fullerene (&F), const int p, const int num_res_faces,
-              const GRBVar fvars[DMAX], const GRBVar evars[EMAX],
+bool read_fullerene(Fullerene (&F));
+void print_primal(const int n, const vector<vertex> primal);
+void print_dual(const int dual_n, const vector<face> dual);
+void print_sol(const Fullerene (&F), const int num_res_faces,
+               const vector<GRBVar> fvars, const vector<GRBVar> evars);
+void save_sol(const Fullerene (&F), const int p, const int num_res_faces,
+              const vector<GRBVar> fvars, const vector<GRBVar> evars,
               ofstream out_files_ptr [NFILE]);
-void get_out_name(const int n, const int p, string &fname);
-void open_out_file(const int n, const int p, string (&out_file_names)[NFILE], 
+void get_out_name(const int p, string &fname);
+void open_out_file(const int p, string (&out_file_names)[NFILE], 
                    ofstream out_files_ptr[NFILE]);
 void close_files(ofstream out_files_ptr[NFILE]);
 
 // From dual.cpp
 int find_position(const int v, const int u, int v_adj[3]);
 int counter_clockwise_walk(const int face_id, int u, int v, const int n, 
-                           vertex (&primal)[NMAX], face& cur_face);
-void construct_planar_dual(fullerene (&F), const int p);
+                           vector<vertex> (&primal), face (&cur_face));
+void construct_planar_dual(Fullerene (&F), const int p);
 
 // From lp.cpp
-int check_if_sol_valid(const fullerene (&F), const int p, 
-                       const GRBVar fvars[DMAX], const GRBVar evars[EMAX]);
-void p_anionic_clar_lp(const fullerene (&F), const int p, GRBEnv grb_env,
+int check_if_sol_valid(const Fullerene (&F), const int p, 
+                       const vector<GRBVar> fvars, const vector<GRBVar> evars);
+void p_anionic_clar_lp(const Fullerene (&F), const int p, GRBEnv grb_env,
                        ofstream out_files_ptr [NFILE]);

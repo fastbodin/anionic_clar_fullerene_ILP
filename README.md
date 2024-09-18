@@ -65,8 +65,6 @@ that I used on my Macbook when running Gurobi 11.
 There are a some compiling flags you can change in `include.h`. 
 
 ```
-// Input the maximum size of a fullerene you plan to read in
-constexpr int NMAX = 120;
 // For debugging purposes
 #define DEBUG 0
 #define DEBUG_DUAL 0
@@ -74,10 +72,8 @@ constexpr int NMAX = 120;
 #define DEBUG_GUROBI 0
 ```
 
-This code will work up to fullerenes on 998 vertices, but the default is set 
-to 120. Change `NMAX` to the maximum number of vertices you want to use.
-The other flags can be changed from 0 to 1 depending on what you want to debug (
-you should not need to).
+The flags can be changed from 0 to 1 depending on what you want to debug
+(you should not need to).
 
 ### To run:
 
@@ -89,13 +85,13 @@ you should not need to).
 Given a file of your input fullerenes, files will be written to *output/*. 
 
 ```
-n_p_anionic_clar_num <- File of solved p-anionic Clar number of fullerenes on n vertices. 
+p_anionic_clar_num <- File of solved p-anionic Clar number of input fullerenes. 
 Format per row: {p-anionic Clar #}.
-n_p_r_pent <- File of resonant pentagons of fullerenes on n vertices. Format per row: 
+p_r_pent <- File of resonant pentagons of input fullerenes. Format per row: 
 {# of res. pent} {face ids of res. pent.}
-n_p_r_hex <- File of resonant hexagon of fullerenes on n vertices. Format per row: 
+p_r_hex <- File of resonant hexagon of input fullerenes. Format per row: 
 {# of res. hex} {face ids of res. hex.}
-n_p_match_e <- File of matching edges of fullerenes on n vertices. Format per row: 
+p_match_e <- File of matching edges of input fullerenes. Format per row: 
 {2*(# of matching edges)} {endpoint 0 and endpoint 1 of each matching edge}
 ```
 

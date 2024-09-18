@@ -4,13 +4,14 @@ int main(int argc, char *argv[]) {
     // want to solve for the p-anionic Clar number
     int p = atoi(argv[1]);
     // isomer
-    fullerene F;
+    Fullerene F;
     // out files
-    string out_file_names[NFILE] = {"output/nnn_pp_anionic_clar_num",
-                                    "output/nnn_pp_r_pent",
-                                    "output/nnn_pp_r_hex",
-                                    "output/nnn_pp_match_e"};
+    string out_file_names[NFILE] = {"output/pp_anionic_clar_num",
+                                    "output/pp_r_pent",
+                                    "output/pp_r_hex",
+                                    "output/pp_match_e"};
     ofstream out_files_ptr[NFILE];
+    open_out_file(p, out_file_names, out_files_ptr);
 
     // define gurobi solve environments 
     GRBEnv grb_env = GRBEnv(true);
@@ -19,16 +20,12 @@ int main(int argc, char *argv[]) {
 
     int graph_num = 0;
     // while there are isomers to read in
-    while (read_fullerene(&F.n, F.primal)) {
+    while (read_fullerene(F)) {
         F.id = graph_num;
         // construct planar dual graph
         construct_planar_dual(F, p);
-        //construct_planar_dual(F.n ,F.primal, &F.dual_n, F.dual, &F.num_edges, F.edges);
-        open_out_file(F.n, p, out_file_names, out_files_ptr);
         // attempt to find p-anionic Clar structure
         p_anionic_clar_lp(F, p, grb_env, out_files_ptr);
-        //print_sol(F, p, anionic_clar_num, out_files_ptr);
-        close_files(out_files_ptr);
 
 #if DEBUG
         cout << "Graph number " << graph_num << endl;
@@ -37,5 +34,6 @@ int main(int argc, char *argv[]) {
 #endif
         graph_num++;
     }
+    close_files(out_files_ptr);
 }
 

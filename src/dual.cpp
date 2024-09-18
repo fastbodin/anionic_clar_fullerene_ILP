@@ -15,7 +15,7 @@ int find_position(const int v, const int u, int v_adj[3]) {
 
 
 int counter_clockwise_walk(const int face_id, int u, int v, const int n, 
-                           vertex (&primal)[NMAX], face& cur_face) {
+                           vector<vertex> (&primal), face (&cur_face)) {
     // find the position of v in u's adj list, remember this list is in clockwise order
     // in a planar embedding
     int pos = find_position(u, v, primal[u].adj_v);
@@ -56,7 +56,7 @@ int counter_clockwise_walk(const int face_id, int u, int v, const int n,
 }
 
 
-void construct_planar_dual(fullerene (&F), const int p) {
+void construct_planar_dual(Fullerene (&F), const int p) {
     // When we read in the fullerene, we had not yet assigned face ids. Therefore,
     // we set the face ids at each vertex as -1 (to represent unassigned). We 
     // will now assign them by constructing each planar face
