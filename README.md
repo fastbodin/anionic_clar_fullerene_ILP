@@ -82,7 +82,7 @@ you should not need to).
 ### To run:
 
 ```
-./comp_p_anionic_clar_num {value of p to solve for} < {file of fullerenes}
+./build/comp_p_anionic_clar_num {value of p to solve for} < {file of fullerenes}
 ```
 
 ### Output:
