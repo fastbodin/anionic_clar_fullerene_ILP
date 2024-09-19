@@ -54,7 +54,7 @@ int counter_clockwise_walk(const int face_id, int u, int v, const int n,
                         to_string(face_size));
   }
 #if DEBUG_DUAL
-  cout << setw(4) << face_id << " has size " << setw(4) << face_size << endl;
+  cout << face_id << " has size " << face_size << endl;
 #endif
   return face_size;
 }
