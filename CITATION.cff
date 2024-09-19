@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "A."
+  given-names: "Slobodin"
+  orcid: "https://orcid.org/0000-0002-6481-2548"
+title: "An ILP to solve the anionic Clar number of fullerenes"
+version: 1.0.0
+date-released: 2024-09-20
+url: "https://github.com/fastbodin/p_anionic_clar_number_of_fullerenes"
