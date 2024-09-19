@@ -17,9 +17,9 @@ int check_if_sol_valid(const Fullerene(&F), const int p,
         covered++;
     }
     if (covered != 1) {
-      throw_error(F.n, p, F.id,
-                  "\nVertex " + to_string(i) + " is covered " +
-                      to_string(covered) + " times");
+      const string msg = "\nVertex " + to_string(i) + " is covered " +
+                         to_string(covered) + " times by structure.";
+      throw_error(F.n, p, F.id, msg);
     }
   }
   // for each face in graph
@@ -31,9 +31,8 @@ int check_if_sol_valid(const Fullerene(&F), const int p,
     }
   }
   if (res_pents != p) {
-    throw_error(F.n, p, F.id,
-                "\nIncorrect number of resonant pentagons: " +
-                    to_string(res_pents));
+    const string msg = "\nIncorrect # of res. pents: " + to_string(res_pents);
+    throw_error(F.n, p, F.id, msg);
   }
   return num_res_faces;
 }
@@ -77,8 +76,7 @@ void p_anionic_clar_lp(const Fullerene(&F), const int p, GRBEnv grb_env,
         cout << i << " is endpoint of edge " << F.primal[i].edges[j] << endl;
         cout << i << " lies on face " << F.primal[i].faces[j] << endl;
 #endif
-        cons1 += evars[F.primal[i].edges[j]];
-        cons1 += fvars[F.primal[i].faces[j]];
+        cons1 += evars[F.primal[i].edges[j]] + fvars[F.primal[i].faces[j]];
       }
       // add the constraint to the model
       model.addConstr(cons1 == 1);
@@ -87,9 +85,8 @@ void p_anionic_clar_lp(const Fullerene(&F), const int p, GRBEnv grb_env,
     // need p resonant pentagons
     GRBLinExpr cons2 = 0;
     for (int f = 0; f < F.dual_n; f++) {
-      if (F.dual[f].size == 5) {
+      if (F.dual[f].size == 5)
         cons2 += fvars[f];
-      }
     }
     // add constraint to model
     model.addConstr(cons2 == p);
@@ -120,18 +117,15 @@ void p_anionic_clar_lp(const Fullerene(&F), const int p, GRBEnv grb_env,
 #endif
       return;
     } else {
-      throw_error(F.n, p, F.id,
-                  "\nStatus of solve is neither GRB_OPTIMAL (2) "
-                  "nor GRB_INFEASIBLE (3) but is " +
-                      to_string(optimstatus) +
-                      "\nSee "
-                      "https://www.gurobi.com/documentation/current/refman/"
-                      "optimization_status_codes.html#sec:StatusCodes");
+      const string msg =
+          "\nStatus of solve is: " + to_string(optimstatus) +
+          "\nTo see what went wrong, checkout Gurobi Optimization Status Codes";
+      throw_error(F.n, p, F.id, msg);
     }
   } catch (GRBException e) {
-    throw_error(F.n, p, F.id,
-                "\nCode: " + to_string(e.getErrorCode()) +
-                    "\nMessage: " + e.getMessage());
+    const string msg = "\nCode: " + to_string(e.getErrorCode()) +
+                       "\nMessage: " + e.getMessage();
+    throw_error(F.n, p, F.id, msg);
   } catch (runtime_error e) {
     throw runtime_error(e);
   } catch (...) {

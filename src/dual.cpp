@@ -105,8 +105,7 @@ void construct_planar_dual(Fullerene(&F), const int p) {
   }
   // record the number of edges in the graph
   if (edge_id != 3 * F.n / 2) {
-    throw_error(F.n, p, F.id,
-                "\nIncorrect number of edges: " + to_string(edge_id));
+    throw_error(F.n, p, F.id, "\nIncorrect # of edges: " + to_string(edge_id));
   }
   F.num_edges = edge_id;
   // record the number of faces in the planar dual

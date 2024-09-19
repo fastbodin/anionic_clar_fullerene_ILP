@@ -26,21 +26,21 @@ bool read_fullerene(Fullerene(&F), const int p) {
     // read in degree of vertex i
     if (!(cin >> degree)) {
       throw_error(F.n, p, F.id,
-                  "\nFailed to read in vertex " + to_string(i) + "'s degree.");
+                  "\nFailed reading vertex " + to_string(i) + "'s degree");
     }
     // check vertex degree
     if (degree != 3) {
-      throw_error(F.n, p, F.id,
-                  "\nVertex " + to_string(i) + " has invalid degree size " +
-                      to_string(degree));
+      const string msg = "\nVertex " + to_string(i) +
+                         " has invalid degree: " + to_string(degree);
+      throw_error(F.n, p, F.id, msg);
     }
     // for each neighbour of i
     for (int j = 0; j < 3; j++) {
       // update adjacency list of vertex i
       if (!(cin >> F.primal[i].adj_v[j])) {
-        throw_error(F.n, p, F.id,
-                    "\nFailed to read in neighbour " + to_string(j) +
-                        " of vertex " + to_string(i));
+        const string msg = "\nFailed reading neighbour " + to_string(j) +
+                           " of vertex " + to_string(i);
+        throw_error(F.n, p, F.id, msg);
       }
       // each vertex lies on 3 faces, at this time, we do not know what their
       // ids are, we will therefore assign then as -1 to represent 'unassigned'
