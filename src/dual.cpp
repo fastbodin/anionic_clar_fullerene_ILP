@@ -1,18 +1,16 @@
 #include "include.h"
+#include <stdexcept>
 
 int find_position(const int v, const int u, int v_adj[3]) {
 #if DEBUG_DUAL
-    cout << "Looking for neighbour " << setw(4) << u << " of vertex " << setw(4) 
-        << v << endl;
+    cout << "Looking for neighbour " << u << " of vertex " << v << endl;
 #endif
     for (int i = 0; i < 3; i++) {
         if (v_adj[i] == u) return i;
     }
-    cerr << "Error: Could not find position of " << u << " in neighbourhood of "
-         << v << endl;
-    exit(1);
+    throw runtime_error("\nCould not find position of vertex " + to_string(u) +
+                        " in neighbourhood of vertex " + to_string(v));
 }
-
 
 int counter_clockwise_walk(const int face_id, int u, int v, const int n, 
                            vector<vertex> (&primal), face (&cur_face)) {
@@ -33,7 +31,11 @@ int counter_clockwise_walk(const int face_id, int u, int v, const int n,
         primal[u].faces[pos] = face_id;
         // we want to grab the next vertex on the face during our counter clockwise walk, 
         // first we grab the position of u in v's adj list. 
-        pos = find_position(v, u, primal[v].adj_v);
+        try {
+            pos = find_position(v, u, primal[v].adj_v);
+        } catch (runtime_error e) {
+            throw runtime_error(e);
+        }
         // move to the next position (modulo 3) in v's adj list to get the next vertex
         pos = (pos + 1) % 3;
         // record w as this next vertex
@@ -45,9 +47,8 @@ int counter_clockwise_walk(const int face_id, int u, int v, const int n,
     }
     // lets check that face is pentagon or hexagon
     if (face_size != 5 && face_size != 6) {
-        cerr << "Error: face " << setw(4) << face_id << " has size " << setw(4) 
-             << face_size << endl;
-        exit(1);
+        throw runtime_error("\nError: face " + to_string(face_id) + " has size " + 
+                            to_string(face_size));
     }
 #if DEBUG_DUAL
     cout << setw(4) << face_id << " has size " << setw(4) << face_size << endl;
@@ -77,7 +78,11 @@ void construct_planar_dual(Fullerene (&F), const int p) {
                 // u is the jth neighbour of v
                 F.primal[v].edges[j] = edge_id;
                 // find position of v in u's neighbourhood
-                F.primal[u].edges[find_position(u, v, F.primal[u].adj_v)] = edge_id;
+                try {
+                    F.primal[u].edges[find_position(u, v, F.primal[u].adj_v)] = edge_id;
+                } catch(runtime_error e) {
+                    throw_error(F.n, p, F.id, e.what());
+                }
                 // record vertices of given edge
                 F.edges[edge_id].vertices[0] = v;
                 F.edges[edge_id].vertices[1] = u;
@@ -86,16 +91,20 @@ void construct_planar_dual(Fullerene (&F), const int p) {
             // if face is unassigned
             if (F.primal[v].faces[j] == -1) {
                 // lets walk the face containing u and v
-                F.dual[face_id].size = counter_clockwise_walk(face_id, v, u, F.n, 
-                                                              F.primal, F.dual[face_id]);
+                try {
+                    F.dual[face_id].size = counter_clockwise_walk(face_id, v, u, F.n, 
+                                                                  F.primal, 
+                                                                  F.dual[face_id]);
+                } catch(runtime_error e) {
+                    throw_error(F.n, p, F.id, e.what());
+                }
                 face_id++;
             }
         }
     }
     // record the number of edges in the graph
     if (edge_id != 3*F.n/2) { 
-        cerr << "Incorrect number of edges: " << edge_id << endl;
-        exit(1);
+        throw_error(F.n, p, F.id, "\nIncorrect number of edges: " + to_string(edge_id));
     }
     F.num_edges = edge_id;
     // record the number of faces in the planar dual
@@ -113,7 +122,11 @@ void construct_planar_dual(Fullerene (&F), const int p) {
             u = F.dual[f].vertices[j];
             v = F.dual[f].vertices[(j+1) % face_f_size];
             // get the position of u in v's adj list
-            pos = find_position(v, u, F.primal[v].adj_v);
+            try {
+                pos = find_position(v, u, F.primal[v].adj_v);
+            } catch(runtime_error e) {
+                throw_error(F.n, p, F.id, e.what());
+            }
             // face_g is the face that v and u lie on that is not equal to face f
             face_g = F.primal[v].faces[pos];
             // update adj list of face f

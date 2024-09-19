@@ -1,16 +1,22 @@
 #include "include.h"
 
+// For error reporting
+void throw_error(const int n, const int p, const int graph_id, string error_message) {
+    throw runtime_error("\nError: n = " + to_string(n) + ", p = " +
+                        to_string(p) + ", graph num = " + to_string(graph_id) +
+                        error_message);
+}
+
 // read in fullerene graph and populate some default values into the 
 // data structure
-bool read_fullerene(Fullerene (&F)) {
+bool read_fullerene(Fullerene (&F), const int p) {
     int degree, n;
     // read in number of vertices of isomer
     if (!(cin >> n)) return false;
     // check that number of vertices is valid
     // n should be an even number at least 20 and not equal to 22
-    if (n < 20 || n == 22) {
-        cerr << "Error: Invalid fullerene size of " << n << endl;
-        exit(1);
+    if (n < 20 || n == 22 || n % 2 != 0) {
+        throw_error(F.n, p, F.id, "\nInvalid fullerene size " + to_string(n));
     }
     // resize the fullerene
     F.Resize(n);
@@ -18,21 +24,20 @@ bool read_fullerene(Fullerene (&F)) {
     for (int i = 0; i < n; i++) {
         // read in degree of vertex i
         if (!(cin >> degree)) {
-            cerr << "Error: Failed to read in vertex degree" << endl;
-            exit(1);
+            throw_error(F.n, p, F.id, "\nFailed to read in vertex " + to_string(i) +
+                        "'s degree.");
         }
         // check vertex degree
         if (degree != 3) {
-            cerr << "Error: Invalid degree size: " << degree << endl;
-            exit(1);
+            throw_error(F.n, p, F.id, "\nVertex " + to_string(i) +
+                        " has invalid degree size " + to_string(degree));
         }
         // for each neighbour of i
         for (int j = 0; j < 3; j++) {
             // update adjacency list of vertex i
             if (!(cin >> F.primal[i].adj_v[j])) {
-                cerr << "Error: Failed to read in neighbour: " << j
-                          << " of vertex " << i << endl;
-                exit(1);
+                throw_error(F.n, p, F.id, "\nFailed to read in neighbour " + 
+                            to_string(j) + " of vertex " + to_string(i));
             }
             // each vertex lies on 3 faces, at this time, we do not know what their
             // ids are, we will therefore assign then as -1 to represent 'unassigned'
@@ -148,8 +153,7 @@ void open_out_file(const int p, string (&out_file_names)[NFILE],
          get_out_name(p, out_file_names[i]);
          out_files_ptr[i].open(out_file_names[i], ios::app);
          if (!out_files_ptr[i].is_open()) {
-             cerr << "Error opening file " << out_file_names[i] << endl;
-             exit(1);
+            throw runtime_error("\nError: Could not open file " + out_file_names[i]);
          }
     }
 }

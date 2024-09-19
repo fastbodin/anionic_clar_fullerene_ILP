@@ -1,7 +1,7 @@
 #include "include.h"
 
-int check_if_sol_valid(const Fullerene (&F), const int p, 
-                       const vector<GRBVar> fvars, const vector<GRBVar> evars) {
+int check_if_sol_valid(const Fullerene (&F), const int p, const vector<GRBVar> fvars, 
+                       const vector<GRBVar> evars) {
     int num_res_faces = 0, res_pents = 0;
     // for each vertex in the graph
     for (int i = 0; i < F.n; i++) {
@@ -15,10 +15,8 @@ int check_if_sol_valid(const Fullerene (&F), const int p,
             if (fvars[F.primal[i].faces[j]].get(GRB_DoubleAttr_X) > 0.99) covered++;
         }
         if (covered != 1) {
-            cerr << "n = " << F.n << ", p = " << p << ", graph num = " << F.id << endl;
-            cerr << "Error: " << "Vertex " << i << " is covered " << covered << 
-                " times" << endl;
-            exit(1);
+            throw_error(F.n, p, F.id, "\nVertex " + to_string(i) + " is covered " +
+                        to_string(covered) + " times");
         }
     }
     // for each face in graph
@@ -29,14 +27,14 @@ int check_if_sol_valid(const Fullerene (&F), const int p,
         }
     }
     if (res_pents != p) {
-        cerr << "Incorrect number of resonant pentagons: " << res_pents << endl;
-        exit(1);
+        throw_error(F.n, p, F.id, "\nIncorrect number of resonant pentagons: " +
+                    to_string(res_pents));
     }
     return num_res_faces;
 }
 
 void p_anionic_clar_lp(const Fullerene (&F), const int p, GRBEnv grb_env,
-                      ofstream out_files_ptr [NFILE]) {
+                       ofstream out_files_ptr [NFILE]) {
 #if DEBUG_CLAR
     cout << "n = " << F.n << ", p = " << p << ", graph num = " << F.id << endl;
     cout << "Solving LP" << endl;
@@ -117,19 +115,18 @@ void p_anionic_clar_lp(const Fullerene (&F), const int p, GRBEnv grb_env,
 #endif
             return;
         } else {
-            cerr << "n = " << F.n << ", p = " << p << ", graph num = " << F.id << endl;
-            cerr << "Something went wrong with the solve:" << endl;
-            exit(1);
+            throw_error(F.n, p, F.id, "\nStatus of solve is neither GRB_OPTIMAL (2) "
+                        "nor GRB_INFEASIBLE (3) but is " + to_string(optimstatus) + 
+                        "\nSee https://www.gurobi.com/documentation/current/refman/"
+                        "optimization_status_codes.html#sec:StatusCodes");
         }
     } catch(GRBException e) {
-        cerr << "n = " << F.n << ", p = " << p << ", graph num = " << F.id << endl;
-        cerr << "Error code = " << e.getErrorCode() << endl;
-        cerr << e.getMessage() << endl;
-        exit(1);
+        throw_error(F.n, p, F.id, "\nCode: " + to_string(e.getErrorCode()) + 
+                    "\nMessage: " + e.getMessage());
+    } catch(runtime_error e) {
+        throw runtime_error(e);
     } catch (...) {
-        cerr << "n = " << F.n << ", p = " << p << ", graph num = " << F.id << endl;
-        cerr << "Error during optimization" << endl;
-        exit(1);
+        throw_error(F.n, p, F.id, "\nUnknown error during optimization");
     }
 }
 

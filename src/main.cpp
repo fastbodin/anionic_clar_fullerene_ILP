@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
 
     int graph_num = 0;
     // while there are isomers to read in
-    while (read_fullerene(F)) {
+    while (read_fullerene(F, p)) {
         F.id = graph_num;
         // construct planar dual graph
         construct_planar_dual(F, p);

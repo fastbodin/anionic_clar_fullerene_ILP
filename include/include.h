@@ -68,7 +68,8 @@ public:
 };
 
 // From read_and_print.cpp
-bool read_fullerene(Fullerene (&F));
+void throw_error(const int n, const int p, const int graph_id, string error_message);
+bool read_fullerene(Fullerene (&F), const int p);
 void print_primal(const int n, const vector<vertex> primal);
 void print_dual(const int dual_n, const vector<face> dual);
 void print_sol(const Fullerene (&F), const int num_res_faces,
