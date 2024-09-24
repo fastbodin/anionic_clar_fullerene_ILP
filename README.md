@@ -1,4 +1,4 @@
-# An ILP to solve the anionic Clar number of fullerenes
+# An ILP for solving the anionic Clar number of fullerenes
 
 ## Background
 
