@@ -119,7 +119,7 @@ matching edges: (1, 9), (2, 3), (8, 19), (13, 14), (15, 24), (20, 28), and (25,
 29).
 
 ## Testing your build
-The directory 'unit_test' contains code to test whether your build is solving
+The directory `unit_test` contains code to test whether your build is solving
 the ILPs correctly. It contains src/ and full/ and a Makefile. The adjacency
 lists of isomers C20:1 and C60:1812 can be found in full/full_adj/. Please
 update the Makefile to point to your Gurobi library (as above). When compiled,
