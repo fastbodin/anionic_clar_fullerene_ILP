@@ -118,3 +118,18 @@ There are two resonant pentagons: 1 and 12, one resonant hexagon: 9, and seven
 matching edges: (1, 9), (2, 3), (8, 19), (13, 14), (15, 24), (20, 28), and (25,
 29).
 
+## Citation
+
+If you use this code in your research, please cite it via:
+
+```
+@software{Slobodin_ILP_2024,
+author = {Slobodin, A.},
+month = sep,
+title = {{An ILP for solving the anionic Clar number of fullerenes}},
+url = {https://github.com/fastbodin/p_anionic_clar_number_of_fullerenes},
+version = {1.0.0},
+year = {2024}
+}
+'''
+
