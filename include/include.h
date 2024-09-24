@@ -92,5 +92,5 @@ void construct_planar_dual(Fullerene(&F), const int p);
 // From lp.cpp
 int check_if_sol_valid(const Fullerene(&F), const int p,
                        const vector<GRBVar> fvars, const vector<GRBVar> evars);
-void p_anionic_clar_lp(const Fullerene(&F), const int p, GRBEnv grb_env,
-                       ofstream out_files_ptr[NFILE]);
+int p_anionic_clar_lp(const Fullerene(&F), const int p, GRBEnv grb_env,
+                      ofstream out_files_ptr[NFILE]);

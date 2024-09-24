@@ -37,8 +37,8 @@ int check_if_sol_valid(const Fullerene(&F), const int p,
   return num_res_faces;
 }
 
-void p_anionic_clar_lp(const Fullerene(&F), const int p, GRBEnv grb_env,
-                       ofstream out_files_ptr[NFILE]) {
+int p_anionic_clar_lp(const Fullerene(&F), const int p, GRBEnv grb_env,
+                      ofstream out_files_ptr[NFILE]) {
 #if DEBUG_CLAR
   cout << "n = " << F.n << ", p = " << p << ", graph num = " << F.id << endl;
   cout << "Solving LP" << endl;
@@ -107,7 +107,7 @@ void p_anionic_clar_lp(const Fullerene(&F), const int p, GRBEnv grb_env,
 #if DEBUG_CLAR
       print_sol(F, num_res_faces, fvars, evars);
 #endif
-      return;
+      return num_res_faces;
       // if there is no solution
     } else if (optimstatus == GRB_INFEASIBLE) {
       // there are 0 resonant faces since no valid solution
@@ -115,7 +115,7 @@ void p_anionic_clar_lp(const Fullerene(&F), const int p, GRBEnv grb_env,
 #if DEBUG_CLAR
       print_sol(F, 0, fvars, evars);
 #endif
-      return;
+      return 0;
     } else {
       const string msg =
           "\nStatus of solve is: " + to_string(optimstatus) +
@@ -131,4 +131,5 @@ void p_anionic_clar_lp(const Fullerene(&F), const int p, GRBEnv grb_env,
   } catch (...) {
     throw_error(F.n, p, F.id, "\nUnknown error during optimization");
   }
+  return -1;
 }
