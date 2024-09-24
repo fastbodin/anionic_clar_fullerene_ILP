@@ -131,5 +131,4 @@ url = {https://github.com/fastbodin/p_anionic_clar_number_of_fullerenes},
 version = {1.0.0},
 year = {2024}
 }
-'''
-
+```
