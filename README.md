@@ -124,7 +124,7 @@ the ILPs correctly. It contains `src/` and `full/` and a Makefile. The adjacency
 lists of isomers C20:1 and C60:1812 can be found in `full/full_adj/`. Please
 update the Makefile to point to your Gurobi library (as above). When compiled,
 the executable will test whether the ILP correctly solves the 0-anionic Clar
-number of C20:1 and all $p$-anionic Clar numbers of C60:1812.
+number of $C_{20}$:1 and all $p$-anionic Clar numbers of $C_{60}$:1812.
 
 ## Citation
 
