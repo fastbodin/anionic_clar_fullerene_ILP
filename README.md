@@ -68,7 +68,7 @@ labelled starting at 0.**
 
 ### Compile:
 
-**Update** the Makefile to point to your copy of Gurobi. I included an example
+**Update** the `Makefile` to point to your copy of Gurobi. I included an example
 that I used on my Macbook when running Gurobi 11.
 
 There are a some compiling flags you can change in `include.h`.
@@ -127,10 +127,10 @@ matching edges: (1, 9), (2, 3), (8, 19), (13, 14), (15, 24), (20, 28), and (25,
 <img src="example/C60_1812.png" width="800">
 
 ## Testing your build
-The directory `unit_test` contains code to test whether your build is solving
-the ILPs correctly. It contains `src/` and `full/` and a Makefile. The
+The directory `unit_test/` contains code to test whether your build is solving
+the ILPs correctly. It contains `src/` and `full/` and a `Makefile`. The
 adjacency lists of isomers $C_{20}$:1 and $C_{60}$:1812 can be found in
-`full/full_adj/`. Please update the Makefile to point to your Gurobi library
+`full/full_adj/`. Please update the `Makefile` to point to your Gurobi library
 (as above). When compiled, the executable will test whether the ILP correctly
 solves the 0-anionic Clar number of $C_{20}$:1 and all $p$-anionic Clar numbers
 of $C_{60}$:1812.
