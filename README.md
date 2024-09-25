@@ -91,7 +91,7 @@ The flags can be changed from 0 to 1 depending on what you want to debug
 ```
 
 ### Output:
-Given a file of your input fullerenes, files will be written to *output/*.
+Given a file of your input fullerenes, files will be written to `output/`.
 
 ```
 p_anionic_clar_num <- File of solved p-anionic Clar number of input fullerenes.
@@ -105,7 +105,7 @@ p_match_e <- File of matching edges of input fullerenes. Format per row:
 ```
 
 See `output/` for an example output for the 2-anionic Clar number of all
-fullerenes on 30 vertices. See `unit_test/output` for an example output of the
+fullerenes on 30 vertices. See `unit_test/output/` for an example output of the
 0-anionic Clar number of $C_{20}$:1 and the $p$-anionic Clar numbers of
 $C_{60}$:1812 (for all even values of $p$ between 0 and 12).
 
