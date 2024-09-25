@@ -2,7 +2,9 @@
 CXX = g++
 
 # Compiler flags
-CXXFLAGS = -I/Library/gurobi1100/macos_universal2/include -L/Library/gurobi1100/macos_universal2/lib -lgurobi_c++ -lgurobi110 -lm -I include/ -std=c++14
+GUROBI = -I/Library/gurobi1100/macos_universal2/include -L/Library/gurobi1100/macos_universal2/lib -lgurobi_c++ -lgurobi110 -lm
+INCLUDE = -I include/
+CXX_FLAGS = -std=c++14 -O3
 
 # Source file
 SRCS = src/*.cpp
@@ -12,7 +14,7 @@ EXEC = build/comp_anionic_clar_num
 
 # Build rule
 $(EXEC): $(SRCS)
-	$(CXX) $(CXXFLAGS) $(SRCS) -o $(EXEC)
+	$(CXX) $(GUROBI) $(INCLUDE) $(CXX_FLAGS) $(SRCS) -o $(EXEC)
 
 # Clean rule
 clean:
