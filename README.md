@@ -114,8 +114,10 @@ $C_{60}$:1812 (for all even values of $p$ between 0 and 12).
 edges are indicated in red, resonant pentagons in purple, and resonant hexagons
 in blue.
 
+<p align="center">
 <img src="example/30_2.png" alt="2-anionic Clar structure on $C_{30}$:1"
 width="400">
+</p>
 
 There are two resonant pentagons: 1 and 12, one resonant hexagon: 9, and seven
 matching edges: (1, 9), (2, 3), (8, 19), (13, 14), (15, 24), (20, 28), and (25,
@@ -124,7 +126,9 @@ matching edges: (1, 9), (2, 3), (8, 19), (13, 14), (15, 24), (20, 28), and (25,
 2. A $p$-anionic Clar structure on $C_{60}$:1812, for even $0 \le p \le
    12$.
 
+<p align="center">
 <img src="example/C60_1812.png" width="800">
+</p>
 
 ## Testing your build
 The directory `unit_test/` contains code to test whether your build is solving
