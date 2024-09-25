@@ -52,10 +52,11 @@ following ILP:
 3. A file containing fullerenes and their adjacency lists in a *particular*
 format. For each isomer in the file, please use the following format such that
 **there exists a planar embedding of the vertices where each neighbor is listed
-in clockwise order.** See output/030_adj for an example for all fullerenes on
-30 vertices. Note that Buckygen (https://github.com/evanberkowitz/buckygen) can
-be used to generate fullerenes in this format. **Vertices should be labelled
-starting at 0.**
+in clockwise order.** See `output/030_adj` for an example for all fullerenes on
+30 vertices. See `unit_test/full/full_adj` for an example of $C_{20}$:1 and
+$C_{60}$:1812. Note that Buckygen (https://github.com/evanberkowitz/buckygen)
+can be used to generate fullerenes in this format. **Vertices should be
+labelled starting at 0.**
 
 ```
 {number of vertices in graph (call it n)}
@@ -103,8 +104,10 @@ p_match_e <- File of matching edges of input fullerenes. Format per row:
 {2*(# of matching edges)} {endpoint 0 and endpoint 1 of each matching edge}
 ```
 
-See *output/* for an example output for the 2-anionic Clar number of
-all fullerenes on 30 vertices.
+See `output/` for an example output for the 2-anionic Clar number of all
+fullerenes on 30 vertices. See `unit_test/output` for an example output of the
+0-anionic Clar number of $C_{20}$:1 and the $p$-anionic Clar numbers of
+$C_{60}$:1812 (for all even values of $p$ between 0 and 12).
 
 ## Example:
 2-anionic Clar structure on $C_{30}$:1. Faces and vertices labelled. Matching
