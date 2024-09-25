@@ -141,11 +141,11 @@ If you use this code in your research, please cite it via:
 
 ```
 @software{Slobodin_An_ILP_for_2024,
-author = {Slobodin, A.},
-month = sep,
-title = {{An ILP for solving the anionic Clar number of fullerenes}},
-url = {https://github.com/fastbodin/anionic_clar_fullerene_ILP},
-version = {1.0.0},
-year = {2024}
+  author =        {Slobodin, A.},
+  month =         sep,
+  title =         {{An ILP for solving the anionic Clar number of
+                   fullerenes}},
+  year =          {2024},
+  url =           {https://github.com/fastbodin/anionic_clar_fullerene_ILP},
 }
 ```
