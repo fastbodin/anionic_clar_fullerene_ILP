@@ -121,7 +121,7 @@ There are two resonant pentagons: 1 and 12, one resonant hexagon: 9, and seven
 matching edges: (1, 9), (2, 3), (8, 19), (13, 14), (15, 24), (20, 28), and (25,
 29).
 
-2. Optimal $p$-anionic Clar structures on $C_{60}$:1812, for even $0 \le p \le
+2. A $p$-anionic Clar structure on $C_{60}$:1812, for even $0 \le p \le
    12$.
 
 <img src="example/C60_1812.png" width="800">
