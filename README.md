@@ -110,7 +110,7 @@ fullerenes on 30 vertices. See `unit_test/output` for an example output of the
 $C_{60}$:1812 (for all even values of $p$ between 0 and 12).
 
 ## Example:
-2-anionic Clar structure on $C_{30}$:1. Faces and vertices labelled. Matching
+1. 2-anionic Clar structure on $C_{30}$:1. Faces and vertices labelled. Matching
 edges are indicated in red, resonant pentagons in purple, and resonant hexagons
 in blue.
 
@@ -120,6 +120,10 @@ width="400">
 There are two resonant pentagons: 1 and 12, one resonant hexagon: 9, and seven
 matching edges: (1, 9), (2, 3), (8, 19), (13, 14), (15, 24), (20, 28), and (25,
 29).
+
+2. All $p$-anionic Clar structures on $C_{60}$:1812, for even $0 \le p \le 12$.
+
+<img src="example/C60_1812" width="400">
 
 ## Testing your build
 The directory `unit_test` contains code to test whether your build is solving
