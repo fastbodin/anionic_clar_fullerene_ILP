@@ -140,11 +140,11 @@ of $C_{60}$:1812.
 If you use this code in your research, please cite it via:
 
 ```
-@software{Slobodin_ILP_2024,
+@software{Slobodin_An_ILP_for_2024,
 author = {Slobodin, A.},
 month = sep,
 title = {{An ILP for solving the anionic Clar number of fullerenes}},
-url = {https://github.com/fastbodin/p_anionic_clar_number_of_fullerenes},
+url = {https://github.com/fastbodin/anionic_clar_fullerene_ILP},
 version = {1.0.0},
 year = {2024}
 }
