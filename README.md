@@ -123,7 +123,7 @@ matching edges: (1, 9), (2, 3), (8, 19), (13, 14), (15, 24), (20, 28), and (25,
 
 2. All $p$-anionic Clar structures on $C_{60}$:1812, for even $0 \le p \le 12$.
 
-<img src="example/C60_1812" width="400">
+<img src="example/C60_1812.ong" width="400">
 
 ## Testing your build
 The directory `unit_test` contains code to test whether your build is solving
