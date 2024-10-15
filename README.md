@@ -146,7 +146,7 @@ If you use this code in your research, please cite it via:
 ```
 @software{Slobodin_An_ILP_for_2024,
   author =        {Slobodin, A.},
-  month =         sep,
+  month =         oct,
   title =         {{An ILP for solving the anionic Clar number of
                    fullerenes}},
   year =          {2024},

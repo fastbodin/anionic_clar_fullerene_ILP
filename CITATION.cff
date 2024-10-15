@@ -6,5 +6,5 @@ authors:
   orcid: "https://orcid.org/0000-0002-6481-2548"
 title: "An ILP for solving the anionic Clar number of fullerenes"
 version: 1.0.0
-date-released: 2024-09-20
+date-released: 2024-10-15
 url: "https://github.com/fastbodin/anionic_clar_fullerene_ILP"
