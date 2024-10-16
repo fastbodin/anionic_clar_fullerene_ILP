@@ -69,7 +69,9 @@ labelled starting at 0.**
 ### Compile:
 
 **Update** the `Makefile` to point to your copy of Gurobi. I included an example
-that I used on my Macbook when running Gurobi 11.
+that I used on my Macbook when running Gurobi 11. Please ensure
+that the compiler defined in the `Makefile` is the same that is used
+to compile Gurobi.
 
 There are a some compiling flags you can change in `include.h`.
 

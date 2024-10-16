@@ -1,8 +1,8 @@
 # Compiler
-CXX = g++
+CXX = g++-14
 
 # Compiler flags
-GUROBI = -I/Library/gurobi1100/macos_universal2/include -L/Library/gurobi1100/macos_universal2/lib -lgurobi_c++ -lgurobi110 -lm
+GUROBI = -I/Library/gurobi1103/macos_universal2/include -L/Library/gurobi1103/macos_universal2/lib -lgurobi_c++ -lgurobi110 -lm
 INCLUDE = -I ../include/
 CXX_FLAGS = -std=c++14 -O3
 
