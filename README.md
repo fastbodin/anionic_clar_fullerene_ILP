@@ -68,6 +68,8 @@ labelled starting at 0.**
 
 ### Compile:
 
+Code successfully compiles with GCC 14.2 (https://gcc.gnu.org/gcc-14/).
+
 **Update** the `Makefile` to point to your copy of Gurobi. I included an example
 that I used on my Macbook when running Gurobi 11. Please ensure
 that the compiler defined in the `Makefile` is the same that is used
