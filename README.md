@@ -136,12 +136,12 @@ matching edges: (1, 9), (2, 3), (8, 19), (13, 14), (15, 24), (20, 28), and (25,
 
 ## Testing your build
 The directory `unit_test/` contains code to test whether your build is solving
-the ILPs correctly. It contains `src/` and `full/` and a `Makefile`. The
-adjacency lists of isomers $C_{20}$:1 and $C_{60}$:1812 can be found in
-`full/full_adj/`. Please update the `Makefile` to point to your Gurobi library
-(as above). When compiled and run (test_build.zsh), the executable will test
-whether the ILP correctly solves the 0-anionic Clar number of $C_{20}$:1 and
-all $p$-anionic Clar numbers of $C_{60}$:1812.
+the ILPs correctly. It contains `src/`, `full/`, a `Makefile`, and
+`test_build.zsh`. The adjacency lists of isomers $C_{20}$:1 and $C_{60}$:1812
+can be found in `full/full_adj/`. Please update the `Makefile` to point to your
+Gurobi library (as above). When compiled and run (test_build.zsh), the
+executable will test whether the ILP correctly solves the 0-anionic Clar number
+of $C_{20}$:1 and all $p$-anionic Clar numbers of $C_{60}$:1812.
 
 ## Citation
 
