@@ -37,6 +37,78 @@ int check_if_sol_valid(const Fullerene(&F), const int p,
   return num_res_faces;
 }
 
+int assess_solve(const Fullerene(&F), const int p, GRBModel(&model),
+                 vector<GRBVar>(&fvars), vector<GRBVar>(&evars),
+                 ofstream out_files_ptr[NFILE]) {
+
+  int optimstatus = model.get(GRB_IntAttr_Status);
+  // if optimum is attained
+  if (optimstatus == GRB_OPTIMAL) {
+    // check solution and grab number of resonant faces
+    int num_res_faces = check_if_sol_valid(F, p, fvars, evars);
+    save_sol(F, p, num_res_faces, fvars, evars, out_files_ptr);
+#if DEBUG_CLAR
+    print_sol(F, num_res_faces, fvars, evars);
+#endif
+    return num_res_faces;
+    // if there is no solution
+  } else if (optimstatus == GRB_INFEASIBLE) {
+    // there are 0 resonant faces since no valid solution
+    save_sol(F, p, 0, fvars, evars, out_files_ptr);
+#if DEBUG_CLAR
+    print_sol(F, 0, fvars, evars);
+#endif
+    return 0;
+  } else {
+    const string msg = "\nStatus of solve: " + to_string(optimstatus) +
+                       "\nCheck Gurobi Optimization Status Codes";
+    throw_error(F.n, p, F.id, msg);
+    return -1;
+  }
+}
+
+void add_cons(const Fullerene(&F), const int p, GRBModel(&model),
+              vector<GRBVar>(&fvars), vector<GRBVar>(&evars)) {
+  // each vertex is either in a resonant face or is the endpoint of
+  // a matching edge
+  for (int i = 0; i < F.n; i++) {
+    GRBLinExpr cons1 = 0;
+    for (int j = 0; j < 3; j++) {
+#if DEBUG_CLAR
+      cout << i << " is endpoint of edge " << F.primal[i].edges[j] << endl;
+      cout << i << " lies on face " << F.primal[i].faces[j] << endl;
+#endif
+      cons1 += evars[F.primal[i].edges[j]] + fvars[F.primal[i].faces[j]];
+    }
+    // add the constraint to the model
+    model.addConstr(cons1 == 1);
+  }
+
+  // need p resonant pentagons
+  GRBLinExpr cons2 = 0;
+  for (int f = 0; f < F.dual_n; f++) {
+    if (F.dual[f].size == 5)
+      cons2 += fvars[f];
+  }
+  // add constraint to model
+  model.addConstr(cons2 == p);
+}
+
+void add_vars(const Fullerene(&F), const int p, GRBModel(&model),
+              vector<GRBVar>(&fvars), vector<GRBVar>(&evars)) {
+  // make face variables
+  for (int f = 0; f < F.dual_n; f++) {
+    // lower bound, upper bound, objective coeff, type
+    fvars[f] = model.addVar(0.0, 1.0, 1.0, GRB_BINARY);
+  }
+
+  // make edge variables
+  for (int i = 0; i < F.num_edges; i++) {
+    // lower bound, upper bound, objective coeff, type
+    evars[i] = model.addVar(0.0, 1.0, 0.0, GRB_BINARY);
+  }
+}
+
 int p_anionic_clar_lp(const Fullerene(&F), const int p, GRBEnv grb_env,
                       ofstream out_files_ptr[NFILE]) {
 #if DEBUG_CLAR
@@ -46,6 +118,8 @@ int p_anionic_clar_lp(const Fullerene(&F), const int p, GRBEnv grb_env,
   try {
     // create an empty model
     GRBModel model = GRBModel(grb_env);
+    // The objective is to maximize number of resonant faces
+    model.set(GRB_IntAttr_ModelSense, GRB_MAXIMIZE);
     // get the solver to focus on finding integer solutions
     // https://www.gurobi.com/documentation/11.0/refman/integralityfocus.html
     model.set(GRB_IntParam_IntegralityFocus, 1);
@@ -53,75 +127,20 @@ int p_anionic_clar_lp(const Fullerene(&F), const int p, GRBEnv grb_env,
     // define a 1-dim array for face variables
     // fvars[f] = 1 if f is resonant and 0 otherwise
     vector<GRBVar> fvars(F.dual_n);
-    // make face variables
-    for (int f = 0; f < F.dual_n; f++) {
-      // lower bound, upper bound, objective coeff, type
-      fvars[f] = model.addVar(0.0, 1.0, 1.0, GRB_BINARY);
-    }
-
     // define a 1-dim array for edge variables
     // evars[i] = 1 if the edge i is matching edge and 0 otherwise
     vector<GRBVar> evars(F.num_edges);
-    // make edge variables
-    for (int i = 0; i < F.num_edges; i++) {
-      evars[i] = model.addVar(0.0, 1.0, 0.0, GRB_BINARY);
-    }
+    add_vars(F, p, model, fvars, evars);
 
-    // each vertex is either in a resonant face or is the endpoint of
-    // a matching edge
-    for (int i = 0; i < F.n; i++) {
-      GRBLinExpr cons1 = 0;
-      for (int j = 0; j < 3; j++) {
-#if DEBUG_CLAR
-        cout << i << " is endpoint of edge " << F.primal[i].edges[j] << endl;
-        cout << i << " lies on face " << F.primal[i].faces[j] << endl;
-#endif
-        cons1 += evars[F.primal[i].edges[j]] + fvars[F.primal[i].faces[j]];
-      }
-      // add the constraint to the model
-      model.addConstr(cons1 == 1);
-    }
-
-    // need p resonant pentagons
-    GRBLinExpr cons2 = 0;
-    for (int f = 0; f < F.dual_n; f++) {
-      if (F.dual[f].size == 5)
-        cons2 += fvars[f];
-    }
-    // add constraint to model
-    model.addConstr(cons2 == p);
-
-    // The objective is to maximize number of resonant faces
-    model.set(GRB_IntAttr_ModelSense, GRB_MAXIMIZE);
+    // add constraints to model
+    add_cons(F, p, model, fvars, evars);
 
     // The objective coefficients are set during the creation of
     // the decision variables above. Run model
     model.optimize();
-    int optimstatus = model.get(GRB_IntAttr_Status);
+    // assess the solve
+    return assess_solve(F, p, model, fvars, evars, out_files_ptr);
 
-    // if optimum is attained
-    if (optimstatus == GRB_OPTIMAL) {
-      // check solution and grab number of resonant faces
-      int num_res_faces = check_if_sol_valid(F, p, fvars, evars);
-      save_sol(F, p, num_res_faces, fvars, evars, out_files_ptr);
-#if DEBUG_CLAR
-      print_sol(F, num_res_faces, fvars, evars);
-#endif
-      return num_res_faces;
-      // if there is no solution
-    } else if (optimstatus == GRB_INFEASIBLE) {
-      // there are 0 resonant faces since no valid solution
-      save_sol(F, p, 0, fvars, evars, out_files_ptr);
-#if DEBUG_CLAR
-      print_sol(F, 0, fvars, evars);
-#endif
-      return 0;
-    } else {
-      const string msg =
-          "\nStatus of solve is: " + to_string(optimstatus) +
-          "\nTo see what went wrong, checkout Gurobi Optimization Status Codes";
-      throw_error(F.n, p, F.id, msg);
-    }
   } catch (GRBException e) {
     const string msg = "\nCode: " + to_string(e.getErrorCode()) +
                        "\nMessage: " + e.getMessage();
